@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOGHEY — Performance Marketing Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#5332C9;
+    --orange:#FF5555;
+    --lemon:#F1F95A;
+    --white:#FFFFFF;
+    --black:#080507;
+    --ink:#0d0a0c;
+    --line:rgba(255,255,255,.10);
+    --muted:rgba(255,255,255,.58);
+    --display:"Bricolage Grotesque",sans-serif;
+    --body:"Hanken Grotesk",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:var(--body);
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* atmospheric glow like the palette card */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(900px 600px at 8% -5%, rgba(120,30,40,.55), transparent 60%),
+      radial-gradient(700px 500px at 95% 110%, rgba(83,50,201,.20), transparent 60%);
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--lemon);color:var(--black)}
+
+  /* ---------- NAV ---------- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.3s}
+  nav.scrolled{background:rgba(8,5,7,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;max-width:1240px;margin:0 auto}
+  .logo{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+  .logo .dot{width:11px;height:11px;border-radius:50%;background:var(--lemon);box-shadow:0 0 18px var(--lemon)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a:not(.btn){font-size:14.5px;font-weight:500;color:var(--muted);transition:.2s}
+  .nav-links a:not(.btn):hover{color:var(--white)}
+  .btn{font-family:var(--body);font-weight:700;font-size:14.5px;cursor:pointer;border:none;transition:.25s;display:inline-block;text-decoration:none}
+  .btn-pill{background:var(--lemon);color:var(--black);padding:11px 22px;border-radius:100px}
+  .btn-pill:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(241,249,90,.30)}
+  .menu-toggle{display:none;background:none;border:none;color:var(--white);font-size:26px;cursor:pointer}
+
+  /* ---------- HERO ---------- */
+  header{padding:170px 0 90px}
+  .badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:100px;padding:7px 15px;font-size:13px;color:var(--muted);margin-bottom:30px}
+  .badge .ping{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:ping 1.6s infinite}
+  @keyframes ping{0%,100%{opacity:1}50%{opacity:.25}}
+  h1.hero{font-family:var(--display);font-weight:800;font-size:clamp(3rem,8.5vw,7.2rem);line-height:.95;letter-spacing:-.035em;max-width:14ch}
+  h1.hero .o{color:var(--orange)}
+  h1.hero .p{color:var(--purple);-webkit-text-stroke:1px var(--purple);color:transparent}
+  .sub{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--muted);max-width:54ch;margin:28px 0 38px;line-height:1.55}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn-ghost{border:1px solid var(--line);color:var(--white);padding:14px 26px;border-radius:100px}
+  .btn-ghost:hover{border-color:var(--white);background:rgba(255,255,255,.04)}
+  .btn-big{background:var(--orange);color:var(--white);padding:14px 30px;border-radius:100px}
+  .btn-big:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,85,85,.35)}
+  .stats{display:flex;gap:54px;flex-wrap:wrap;margin-top:72px;padding-top:44px;border-top:1px solid var(--line)}
+  .stat .num{font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,5vw,3.4rem);letter-spacing:-.03em;line-height:1}
+  .stat:nth-child(1) .num{color:var(--lemon)}
+  .stat:nth-child(2) .num{color:var(--white)}
+  .stat:nth-child(3) .num{color:var(--orange)}
+  .stat .lab{font-size:13.5px;color:var(--muted);margin-top:8px;text-transform:uppercase;letter-spacing:.05em}
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden;white-space:nowrap;background:var(--purple)}
+  .marquee-track{display:inline-block;animation:scroll 26s linear infinite}
+  .marquee span{font-family:var(--display);font-weight:700;font-size:1.45rem;letter-spacing:-.01em;padding:0 28px;color:var(--white)}
+  .marquee span .s{color:var(--lemon)}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:110px 0;position:relative;z-index:1}
+  .eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lemon);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:30px;height:1px;background:var(--lemon)}
+  h2{font-family:var(--display);font-weight:800;font-size:clamp(2.3rem,5vw,3.7rem);letter-spacing:-.03em;line-height:1.02;max-width:18ch}
+  .sec-intro{color:var(--muted);max-width:56ch;margin-top:20px;font-size:1.08rem}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:60px}
+  .svc{border:1px solid var(--line);border-radius:20px;padding:30px;background:rgba(255,255,255,.015);transition:.3s;position:relative;overflow:hidden}
+  .svc:hover{border-color:rgba(255,255,255,.25);transform:translateY(-5px);background:rgba(255,255,255,.04)}
+  .svc .ix{font-family:var(--display);font-weight:800;font-size:14px;color:var(--muted);letter-spacing:.1em}
+  .svc h3{font-family:var(--display);font-weight:700;font-size:1.5rem;margin:16px 0 12px;letter-spacing:-.02em}
+  .svc p{color:var(--muted);font-size:.97rem;line-height:1.55}
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+  .tag{font-size:11.5px;border:1px solid var(--line);border-radius:100px;padding:4px 11px;color:var(--muted)}
+  .svc:nth-child(1):hover{box-shadow:inset 0 -60px 60px -50px var(--orange)}
+  .svc:nth-child(2):hover{box-shadow:inset 0 -60px 60px -50px var(--purple)}
+  .svc:nth-child(3):hover{box-shadow:inset 0 -60px 60px -50px var(--lemon)}
+  .svc:nth-child(4):hover{box-shadow:inset 0 -60px 60px -50px var(--orange)}
+  .svc:nth-child(5):hover{box-shadow:inset 0 -60px 60px -50px var(--purple)}
+  .svc:nth-child(6):hover{box-shadow:inset 0 -60px 60px -50px var(--lemon)}
+  .svc:nth-child(7):hover{box-shadow:inset 0 -60px 60px -50px var(--orange)}
+
+  /* ---------- AI MODULE ---------- */
+  .ai{background:linear-gradient(135deg, rgba(83,50,201,.22), rgba(255,85,85,.10));border:1px solid var(--line);border-radius:28px;padding:60px;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;margin-top:10px}
+  .ai h2{font-size:clamp(2rem,4vw,3rem)}
+  .ai .lemon{color:var(--lemon)}
+  .chips{display:flex;flex-wrap:wrap;gap:10px}
+  .chip{background:rgba(8,5,7,.55);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:.92rem;font-weight:500;transition:.2s}
+  .chip:hover{border-color:var(--lemon);color:var(--lemon);transform:translateY(-2px)}
+
+  /* ---------- CLIENTS ---------- */
+  .clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:60px}
+  .client{border:1px solid var(--line);border-radius:20px;padding:26px;transition:.3s;background:rgba(255,255,255,.015)}
+  .client:hover{border-color:rgba(255,255,255,.22);transform:translateY(-4px)}
+  .client-top{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+  .ini{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.15rem;flex-shrink:0}
+  .client:nth-child(1) .ini{background:var(--orange);color:var(--white)}
+  .client:nth-child(2) .ini{background:var(--lemon);color:var(--black)}
+  .client:nth-child(3) .ini{background:var(--purple);color:var(--white)}
+  .client:nth-child(4) .ini{background:var(--white);color:var(--black)}
+  .client h3{font-family:var(--display);font-weight:700;font-size:1.2rem;letter-spacing:-.02em;line-height:1.2}
+  .client .ind{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:4px}
+
+  /* ---------- WORK (video + web) ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:60px}
+  .work{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:rgba(255,255,255,.015);transition:.3s}
+  .work:hover{border-color:rgba(255,255,255,.22);transform:translateY(-4px)}
+  .work-vis{height:190px;display:grid;place-items:center;position:relative;overflow:hidden}
+  .work:nth-child(1) .work-vis{background:linear-gradient(135deg,var(--purple),#2a1a66)}
+  .work:nth-child(2) .work-vis{background:linear-gradient(135deg,var(--orange),#8c1f1f)}
+  .work:nth-child(3) .work-vis{background:linear-gradient(135deg,var(--lemon),#9aa01f)}
+  .work:nth-child(4) .work-vis{background:linear-gradient(135deg,#fff,#9a9a9a)}
+  .play{width:64px;height:64px;border-radius:50%;background:rgba(8,5,7,.5);backdrop-filter:blur(6px);display:grid;place-items:center;border:1px solid rgba(255,255,255,.3)}
+  .play svg{width:24px;height:24px;fill:var(--white);margin-left:3px}
+  .wtype{position:absolute;top:14px;left:14px;background:rgba(8,5,7,.6);backdrop-filter:blur(6px);border-radius:100px;padding:5px 13px;font-size:12px;font-weight:600}
+  .work-body{padding:26px}
+  .work-body h3{font-family:var(--display);font-weight:700;font-size:1.25rem;letter-spacing:-.02em;margin-bottom:6px}
+  .work-body .meta{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+  .work-body p{color:var(--muted);font-size:.95rem;margin-bottom:16px}
+  .wresult{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.95rem;color:var(--lemon)}
+
+  /* ---------- PROCESS ---------- */
+  .steps{margin-top:60px}
+  .step{display:grid;grid-template-columns:90px 1fr;gap:34px;padding:36px 0;border-top:1px solid var(--line);align-items:start}
+  .step:last-child{border-bottom:1px solid var(--line)}
+  .step .sn{font-family:var(--display);font-weight:800;font-size:3rem;letter-spacing:-.04em;line-height:1}
+  .step:nth-child(1) .sn{color:var(--orange)}
+  .step:nth-child(2) .sn{color:var(--purple);-webkit-text-stroke:1px var(--purple);color:transparent}
+  .step:nth-child(3) .sn{color:var(--lemon)}
+  .step:nth-child(4) .sn{color:var(--white)}
+  .step h3{font-family:var(--display);font-weight:700;font-size:1.6rem;letter-spacing:-.02em;margin-bottom:10px}
+  .step p{color:var(--muted);max-width:62ch;font-size:1.02rem}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:linear-gradient(160deg,rgba(255,85,85,.12),rgba(83,50,201,.14));border:1px solid var(--line);border-radius:28px;padding:60px;display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;margin-top:10px}
+  .contact h2{font-size:clamp(2.2rem,4.5vw,3.4rem)}
+  .contact .sec-intro{font-size:1.1rem}
+  .ci{display:flex;flex-direction:column;gap:14px;margin-top:34px}
+  .ci a{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.97rem;transition:.2s}
+  .ci a:hover{color:var(--lemon)}
+  .ci .ico{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;flex-shrink:0}
+  form{display:grid;gap:14px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  label{font-size:12.5px;color:var(--muted);margin-bottom:6px;display:block;letter-spacing:.03em}
+  input,select,textarea{width:100%;background:rgba(8,5,7,.55);border:1px solid var(--line);border-radius:12px;padding:13px 15px;color:var(--white);font-family:var(--body);font-size:.97rem;transition:.2s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--lemon)}
+  select{appearance:none;cursor:pointer}
+  textarea{resize:vertical;min-height:90px}
+  form .btn-pill{margin-top:6px;width:100%;text-align:center;padding:15px;font-size:15.5px}
+  .formnote{font-size:12.5px;color:var(--muted);text-align:center}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:60px 0 40px;position:relative;z-index:1}
+  .foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;padding-bottom:40px;border-bottom:1px solid var(--line)}
+  .foot-brand{max-width:30ch}
+  .foot-brand p{color:var(--muted);font-size:.95rem;margin-top:14px}
+  .foot-links{display:flex;gap:60px;flex-wrap:wrap}
+  .fcol h4{font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:16px}
+  .fcol a{display:block;font-size:.96rem;margin-bottom:11px;color:var(--white);opacity:.8;transition:.2s}
+  .fcol a:hover{opacity:1;color:var(--lemon)}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;padding-top:30px;font-size:13.5px;color:var(--muted)}
+  .socials{display:flex;gap:10px}
+  .socials a{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;transition:.2s}
+  .socials a:hover{border-color:var(--lemon);color:var(--lemon);transform:translateY(-2px)}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0;transform:translateY(26px);transition:.7s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .nav-links{position:fixed;inset:0 0 0 auto;width:75%;max-width:320px;flex-direction:column;background:var(--ink);padding:90px 30px;gap:22px;transform:translateX(100%);transition:.35s;border-left:1px solid var(--line);align-items:flex-start}
+    .nav-links.open{transform:none}
+    .menu-toggle{display:block;z-index:60}
+    .services-grid,.work-grid{grid-template-columns:1fr}
+    .clients-grid{grid-template-columns:repeat(2,1fr)}
+    .ai,.contact{grid-template-columns:1fr;padding:38px}
+    .step{grid-template-columns:1fr;gap:10px}
+    .step .sn{font-size:2.2rem}
+    .stats{gap:36px}
+    .row{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="#top" class="logo"><span class="dot"></span>MOGHEY</a>
+    <div class="nav-links" id="navlinks">
+      <a href="#services">Services</a>
+      <a href="#clients">Clients</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#contact" class="btn btn-pill">Start a project</a>
+    </div>
+    <button class="menu-toggle" id="menuBtn">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="top">
+  <div class="wrap">
+    <span class="badge reveal"><span class="ping"></span>Now booking Q3 growth partners</span>
+    <h1 class="hero reveal">Performance <span class="o">marketing</span> that actually <span class="p">performs.</span></h1>
+    <p class="sub reveal">Paid media, organic growth, AI content, video production & websites — everything your brand needs to dominate online, run by a team obsessed with the only metric that matters: returns.</p>
+    <div class="hero-cta reveal">
+      <a href="#contact" class="btn btn-big">Get a free growth plan</a>
+      <a href="#clients" class="btn btn-ghost">See our results →</a>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><div class="num">2.5x</div><div class="lab">Average ROAS</div></div>
+      <div class="stat"><div class="num">20+</div><div class="lab">Brands worked with</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Paid Media <span class="s">✦</span> Organic Growth <span class="s">✦</span> AI Content <span class="s">✦</span> Video Production <span class="s">✦</span> Websites <span class="s">✦</span> Analytics <span class="s">✦</span></span>
+    <span>Paid Media <span class="s">✦</span> Organic Growth <span class="s">✦</span> AI Content <span class="s">✦</span> Video Production <span class="s">✦</span> Websites <span class="s">✦</span> Analytics <span class="s">✦</span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">What we do</div>
+      <h2>Everything your brand needs, under one roof.</h2>
+      <p class="sec-intro">Six tightly integrated services that work together as one growth engine — no silos, no finger-pointing, one accountable team.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc reveal">
+        <div class="ix">01</div>
+        <h3>Paid Media Marketing</h3>
+        <p>High-ROI ad campaigns across Meta, Google, YouTube, and LinkedIn. Integrated with direct channels like WhatsApp and Email marketing for maximum conversions. Every rupee is tracked, tested, and optimized.</p>
+        <div class="tags"><span class="tag">Meta Ads</span><span class="tag">Google Ads</span><span class="tag">WhatsApp</span><span class="tag">Email</span><span class="tag">Programmatic</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="ix">02</div>
+        <h3>Organic Growth</h3>
+        <p>Long-term brand visibility through SEO, content strategy, social media, and email — traffic that keeps coming even when ads are off.</p>
+        <div class="tags"><span class="tag">SEO</span><span class="tag">Content</span><span class="tag">Social Media</span><span class="tag">Community</span><span class="tag">Outreach</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="ix">03</div>
+        <h3>AI Content Module</h3>
+        <p>Content at scale using AI tuned to your brand voice — ad copy, blogs, product descriptions, captions, scripts — consistent and conversion-ready.</p>
+        <div class="tags"><span class="tag">AI Copywriting</span><span class="tag">Brand Voice</span><span class="tag">Automation</span><span class="tag">Bulk Content</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="ix">04</div>
+        <h3>Video Production</h3>
+        <p>From concept to final cut — brand films, short-form reels, testimonials, explainer animations, and ad creatives that stop the scroll.</p>
+        <div class="tags"><span class="tag">Brand Films</span><span class="tag">Reels</span><span class="tag">Ad Creatives</span><span class="tag">Animation</span><span class="tag">Explainers</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="ix">05</div>
+        <h3>Website Designing</h3>
+        <p>High-performance, mobile-first websites tailored to your needs. We design and build E-commerce stores, Corporate websites, SaaS platforms, Portfolios, Blogs, Educational portals, Custom web apps, and high-converting Landing pages.</p>
+        <div class="tags"><span class="tag">E-commerce</span><span class="tag">Corporate</span><span class="tag">SaaS</span><span class="tag">Portfolios</span><span class="tag">Landing Pages</span><span class="tag">Web Apps</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="ix">06</div>
+        <h3>Analytics & Strategy</h3>
+        <p>Full-funnel tracking, attribution modelling, and monthly dashboards so you always know what's working and where to invest next.</p>
+        <div class="tags"><span class="tag">GA4</span><span class="tag">Attribution</span><span class="tag">Reporting</span><span class="tag">A/B Testing</span><span class="tag">Strategy</span></div>
+      </div>
+      <div class="svc reveal">
+        <div class="ix">07</div>
+        <h3>Influencer Marketing</h3>
+        <p>Amplify your brand's voice through strategic influencer partnerships. We handle end-to-end campaigns including big influencer connects, platform-specific product reviews, unboxings, and authentic creator collaborations across Instagram and YouTube.</p>
+        <div class="tags"><span class="tag">Creator Collabs</span><span class="tag">Product Reviews</span><span class="tag">Big Influencer Connect</span><span class="tag">Instagram</span><span class="tag">YouTube</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI MODULE -->
+<section>
+  <div class="wrap">
+    <div class="ai reveal">
+      <div>
+        <div class="eyebrow">AI Content Module</div>
+        <h2>Generate content that <span class="lemon">actually converts.</span></h2>
+        <p class="sec-intro">On-brand copy across every format — powered by advanced AI and trained on performance data from 50+ campaigns. From a single brief, we deliver ad copy, blogs, social posts, email sequences, and video scripts at scale.</p>
+      </div>
+      <div class="chips">
+        <span class="chip">Meta & Google Ad Copy</span>
+        <span class="chip">Instagram / LinkedIn Captions</span>
+        <span class="chip">Blog Intros & Articles</span>
+        <span class="chip">Email Subject Lines & Body</span>
+        <span class="chip">SEO Meta Descriptions</span>
+        <span class="chip">Video Script Hooks & CTAs</span>
+        <span class="chip">WhatsApp Broadcasts</span>
+        <span class="chip">Product Descriptions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section id="clients">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Client showcase</div>
+      <h2>Brands we've helped grow.</h2>
+      <p class="sec-intro">Real campaigns, real numbers. Here's a snapshot of what partnership with us looks like.</p>
+    </div>
+    <div class="clients-grid">
+      <div class="client reveal">
+        <div class="client-top"><div class="ini">ZA</div><div><h3>ZenAura Fashion</h3><div class="ind">Performance Marketing</div></div></div>
+      </div>
+      <div class="client reveal">
+        <div class="client-top"><div class="ini">VM</div><div><h3>Vertex Motors</h3><div class="ind">Content Creation</div></div></div>
+      </div>
+      <div class="client reveal">
+        <div class="client-top"><div class="ini">NL</div><div><h3>NovaLeaf Wellness</h3><div class="ind">Sales Strategy</div></div></div>
+      </div>
+      <div class="client reveal">
+        <div class="client-top"><div class="ini">UR</div><div><h3>Urban Roots Café</h3><div class="ind">Website Creation</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK: VIDEO + WEB -->
+<section id="work">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">Selected work</div>
+      <h2>Video & websites that move the needle.</h2>
+      <p class="sec-intro">A few recent productions and builds — from scroll-stopping creatives to conversion-tuned sites.</p>
+    </div>
+    <div class="work-grid">
+      <div class="work reveal">
+        <div class="work-vis"><span class="wtype">Brand Film</span><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="work-body">
+          <h3>ZenAura Brand Film 2025</h3>
+          <div class="meta">ZenAura · E-Commerce</div>
+          <p>A 90-second hero film positioning ZenAura as the face of sustainable urban fashion. Used as the top-of-funnel anchor across YouTube & Meta.</p>
+          <span class="wresult">▲ 2.1M views · 18% engagement</span>
+        </div>
+      </div>
+      <div class="work reveal">
+        <div class="work-vis"><span class="wtype">Ad Creative</span><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="work-body">
+          <h3>Vertex Motors — Reel Series</h3>
+          <div class="meta">Vertex Motors · Automotive</div>
+          <p>A 6-part short-form reel series built for local lead-gen, each cut for a single model and city with native captions.</p>
+          <span class="wresult">▲ ₹38 cost per qualified lead</span>
+        </div>
+      </div>
+      <div class="work reveal">
+        <div class="work-vis"><span class="wtype">E-commerce</span><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="work-body">
+          <h3>NovaLeaf Storefront</h3>
+          <div class="meta">Shopify · D2C Health</div>
+          <p>A subscription-first Shopify store rebuild with a streamlined checkout and a quiz-driven product finder.</p>
+          <span class="wresult">▲ Conversion 2.1% → 4.4%</span>
+        </div>
+      </div>
+      <div class="work reveal">
+        <div class="work-vis"><span class="wtype">Landing Page</span><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="work-body">
+          <h3>Urban Roots Franchise Page</h3>
+          <div class="meta">Custom · F&B</div>
+          <p>A high-intent franchise-enquiry landing page built to capture and qualify prospective café owners.</p>
+          <span class="wresult">▲ 3.8% form completion rate</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">How we work</div>
+      <h2>A clear four-step path to growth.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="sn">01</div>
+        <div>
+          <h3>Discovery & Audit</h3>
+          <p>We start by understanding your brand, your audience, and your current performance. We audit your ads, website, social, and SEO to find what's working and what's wasting money.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="sn">02</div>
+        <div>
+          <h3>Strategy & Roadmap</h3>
+          <p>Based on the audit, we build a custom 90-day growth plan covering every channel — paid, organic, content, and creative — with clear KPIs and budget allocation.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="sn">03</div>
+        <div>
+          <h3>Execute & Launch</h3>
+          <p>Our team moves fast. Campaigns, creatives, landing pages, and content go live within 14–21 days. You get weekly updates and a dedicated account manager.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="sn">04</div>
+        <div>
+          <h3>Optimize & Scale</h3>
+          <p>We review data every week — A/B testing creatives, adjusting bids, refreshing content, and reallocating budgets to scale what's working and cut what isn't.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div>
+        <div class="eyebrow">Get in touch</div>
+        <h2>Ready to grow faster?</h2>
+        <p class="sec-intro">Tell us about your brand and we'll put together a free custom growth plan — no obligation, no generic advice.</p>
+        <div class="ci">
+          <a href="mailto:hello@moghey.in"><span class="ico">✉</span> hello@moghey.in</a>
+          <a href="https://wa.me/910000000000"><span class="ico">✆</span> +91 00000 00000 (WhatsApp)</a>
+          <a href="#"><span class="ico">◎</span> @moghey on Instagram</a>
+          <a href="#"><span class="ico">in</span> Moghey on LinkedIn</a>
+          <a href="#"><span class="ico">⌖</span> Rajkot, Gujarat · India</a>
+        </div>
+      </div>
+      <form id="enquiry">
+        <div class="row">
+          <div><label>Full Name</label><input type="text" name="name" required placeholder="Your name"></div>
+          <div><label>Email Address</label><input type="email" name="email" required placeholder="you@brand.com"></div>
+        </div>
+        <div class="row">
+          <div><label>Phone Number</label><input type="tel" name="phone" placeholder="Your phone number"></div>
+          <div><label>Brand / Company Name</label><input type="text" name="company" placeholder="Your brand"></div>
+        </div>
+        <div class="row">
+          <div><label>Service Needed</label>
+            <select name="service">
+              <option>Paid Media Marketing</option>
+              <option>Organic Growth / SEO</option>
+              <option>AI Content</option>
+              <option>Video Production</option>
+              <option>Website Creation</option>
+              <option>Full Growth Partnership</option>
+            </select>
+          </div>
+          <div><label>Monthly Budget</label>
+            <select name="budget">
+              <option>₹25K – ₹50K</option>
+              <option>₹50K – ₹1L</option>
+              <option>₹1L – ₹3L</option>
+              <option>₹3L+</option>
+            </select>
+          </div>
+        </div>
+        <div><label>Message / Brief</label><textarea name="message" placeholder="Tell us what you're trying to achieve..."></textarea></div>
+        <button type="submit" class="btn btn-pill">Send enquiry →</button>
+        <p class="formnote" id="formnote">We reply within 1 business day.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#top" class="logo"><span class="dot"></span>MOGHEY</a>
+        <p>Performance marketing that actually performs — paid, organic, content, video & web, all in one place.</p>
+      </div>
+      <div class="foot-links">
+        <div class="fcol"><h4>Navigate</h4>
+          <a href="#services">Services</a><a href="#clients">Clients</a><a href="#work">Work</a><a href="#process">Process</a><a href="#contact">Contact</a>
+        </div>
+        <div class="fcol"><h4>Services</h4>
+          <a href="#services">Paid Media</a><a href="#services">Organic Growth</a><a href="#services">AI Content</a><a href="#services">Video</a><a href="#services">Websites</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2025 Moghey. All rights reserved.</div>
+      <div class="socials">
+        <a href="#" title="Instagram">◎</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">▶</a>
+        <a href="#" title="X">✕</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav scroll bg
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30));
+
+  // mobile menu
+  const btn=document.getElementById('menuBtn'),links=document.getElementById('navlinks');
+  btn.addEventListener('click',()=>{const o=links.classList.toggle('open');btn.textContent=o?'✕':'☰';});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');btn.textContent='☰';}));
+
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el);});
+
+  // form (mailto submission)
+  document.getElementById('enquiry').addEventListener('submit',(e)=>{
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const name = formData.get('name') || '';
+    const email = formData.get('email') || '';
+    const phone = formData.get('phone') || '';
+    const company = formData.get('company') || '';
+    const service = formData.get('service') || '';
+    const budget = formData.get('budget') || '';
+    const message = formData.get('message') || '';
+
+    const subject = encodeURIComponent(`New Enquiry from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCompany: ${company}\nService: ${service}\nBudget: ${budget}\n\nMessage:\n${message}`);
+
+    window.location.href = `mailto:hello@moghey.in?subject=${subject}&body=${body}`;
+
+    const n=document.getElementById('formnote');
+    n.textContent='✓ Opening your email client...';
+    n.style.color='var(--lemon)';
+    
+    setTimeout(() => {
+      e.target.reset();
+      n.textContent='We reply within 1 business day.';
+      n.style.color='var(--muted)';
+    }, 3000);
+  });
+</script>
+</body>
+</html>
