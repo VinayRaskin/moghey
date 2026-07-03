@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOGHEY — Premium Portfolio &amp; Case Studies</title>
+<meta name="description" content="Explore MOGHEY's agency portfolio — real client case studies spanning digital marketing, full-stack web development, and performance campaigns. Tata Motors, Cloudspillar, NOOREL, Outservee & more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #5332C9;
+    --orange: #FF5555;
+    --lemon: #F1F95A;
+    --white: #FFFFFF;
+    --black: #080507;
+    --ink: #0d0a0c;
+    --line: rgba(255,255,255,.10);
+    --muted: rgba(255,255,255,.55);
+    --display: "Bricolage Grotesque", sans-serif;
+    --serif: "DM Serif Display", serif;
+    --body: "Hanken Grotesk", sans-serif;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Atmospheric BG */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(1200px 800px at 15% -5%, rgba(83,50,201,.12), transparent 55%),
+      radial-gradient(900px 700px at 88% 105%, rgba(255,85,85,.10), transparent 55%);
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Utilities */
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 36px; position: relative; z-index: 1; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--lemon); color: var(--black); }
+  img { display: block; max-width: 100%; }
+
+  /* ========== NAV ========== */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; transition: .3s; }
+  nav.scrolled { background: rgba(8,5,7,.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--line); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; padding: 18px 36px; max-width: 1280px; margin: 0 auto; }
+  .logo {
+    font-family: var(--display); font-weight: 800; font-size: 20px;
+    letter-spacing: -.02em; display: inline-flex; align-items: center;
+    gap: 0; text-decoration: none; position: relative;
+  }
+  .logo .ll {
+    display: inline-block;
+    transition: color .28s cubic-bezier(.2,.8,.3,1), text-shadow .28s, transform .28s;
+    line-height: 1;
+  }
+  .logo .ll:nth-child(1):hover { color: var(--lemon); text-shadow: 0 0 18px rgba(241,249,90,.5); transform: translateY(-2px); }
+  .logo .ll:nth-child(2):hover { color: var(--orange); text-shadow: 0 0 18px rgba(255,85,85,.5); transform: translateY(-2px); }
+  .logo .ll:nth-child(3):hover { color: #a98bff; text-shadow: 0 0 18px rgba(169,139,255,.5); transform: translateY(-2px); }
+  .logo .ll:nth-child(4):hover { color: var(--lemon); text-shadow: 0 0 18px rgba(241,249,90,.5); transform: translateY(-2px); }
+  .logo .ll:nth-child(5):hover { color: var(--orange); text-shadow: 0 0 18px rgba(255,85,85,.5); transform: translateY(-2px); }
+  .logo .ll:nth-child(6):hover { color: #a98bff; text-shadow: 0 0 18px rgba(169,139,255,.5); transform: translateY(-2px); }
+  .logo .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--lemon);
+    box-shadow: 0 0 10px rgba(241,249,90,.6);
+    margin-left: 2px; flex-shrink: 0;
+    align-self: flex-end; margin-bottom: 3px;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .logo:hover .dot {
+    transform: scale(1.4);
+    box-shadow: 0 0 16px rgba(241,249,90,.8);
+  }
+  .nav-right { display: flex; align-items: center; gap: 28px; }
+  .nav-right a { font-size: 14px; font-weight: 500; color: var(--muted); transition: .2s; }
+  .nav-right a:hover { color: var(--white); }
+  .nav-pill { background: var(--lemon); color: var(--black) !important; padding: 10px 20px; border-radius: 100px; font-weight: 700 !important; transition: .25s !important; }
+  .nav-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(241,249,90,.3); }
+
+  /* ========== HERO ========== */
+  .hero-section {
+    padding: 160px 0 80px;
+    position: relative; z-index: 1;
+    text-align: center;
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--line); border-radius: 100px;
+    padding: 6px 14px; font-size: 12px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .eyebrow .pip { width: 6px; height: 6px; border-radius: 50%; background: var(--lemon); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(0.8)} }
+  .hero-title {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: .95; letter-spacing: -.04em;
+    margin: 0 auto 28px;
+  }
+  .hero-title em { font-style: italic; font-family: var(--serif); color: var(--lemon); }
+  .hero-sub { font-size: clamp(1rem, 1.4vw, 1.2rem); color: var(--muted); max-width: 55ch; margin: 0 auto 48px; line-height: 1.65; }
+  .case-count { display: inline-flex; align-items: center; gap: 24px; background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 100px; padding: 12px 28px; }
+  .case-count span { font-size: 13px; color: var(--muted); }
+  .case-count strong { font-family: var(--display); font-size: 1.2rem; font-weight: 800; color: var(--white); }
+
+  /* ========== PROJECT NAV ========== */
+  .proj-nav { position: sticky; top: 56px; z-index: 90; background: rgba(8,5,7,.7); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+  .proj-nav-inner { display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; max-width: 1280px; margin: 0 auto; padding: 0 36px; }
+  .proj-nav-inner::-webkit-scrollbar { display: none; }
+  .pnav { padding: 14px 20px; font-size: 13px; font-weight: 600; color: var(--muted); white-space: nowrap; border-bottom: 2px solid transparent; transition: .2s; cursor: pointer; }
+  .pnav:hover, .pnav.active { color: var(--white); border-bottom-color: var(--lemon); }
+
+  /* ========== CASE STUDY WRAPPER ========== */
+  .case-study { padding: 120px 0; position: relative; z-index: 1; }
+  .case-study + .case-study { border-top: 1px solid var(--line); }
+
+  /* SECTION LABEL */
+  .cs-label { display: flex; align-items: center; gap: 14px; margin-bottom: 56px; }
+  .cs-num { font-family: var(--display); font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: .1em; }
+  .cs-num::after { content: ""; display: inline-block; width: 40px; height: 1px; background: var(--line); margin-left: 10px; vertical-align: middle; }
+  .cs-badge { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; border: 1px solid currentColor; }
+
+  /* SPLIT LAYOUT */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .split.reverse { direction: rtl; }
+  .split.reverse > * { direction: ltr; }
+  .split-wide { display: grid; grid-template-columns: .85fr 1.15fr; gap: 80px; align-items: center; }
+
+  /* TEXT ELEMENTS */
+  .cs-client { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem,4vw,3.6rem); letter-spacing: -.03em; line-height: 1.05; margin-bottom: 8px; }
+  .cs-location { font-size: 13px; color: var(--muted); letter-spacing: .04em; margin-bottom: 24px; display: flex; align-items: center; gap: 6px; }
+  .cs-overview { font-size: 1.08rem; color: var(--muted); line-height: 1.7; margin-bottom: 32px; max-width: 50ch; }
+  .cs-overview.full { max-width: none; }
+
+  /* SERVICES */
+  .svc-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+  .svc-tag { font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); letter-spacing: .03em; }
+
+  /* METRICS */
+  .metrics { display: flex; flex-wrap: wrap; gap: 32px; margin-top: 40px; padding-top: 36px; border-top: 1px solid var(--line); }
+  .metric-val { font-family: var(--display); font-weight: 800; font-size: 2.4rem; line-height: 1; margin-bottom: 6px; }
+  .metric-lab { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+  /* BROWSER MOCKUP */
+  .browser {
+    border-radius: 14px;
+    background: #0f0f12;
+    border: 1px solid rgba(255,255,255,.08);
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04);
+  }
+  .browser-bar {
+    height: 36px;
+    background: rgba(255,255,255,.04);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 7px;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .bd { width: 11px; height: 11px; border-radius: 50%; }
+  .bd-r { background: #ff5f56; } .bd-y { background: #ffbd2e; } .bd-g { background: #27c93f; }
+  .browser-url {
+    flex: 1; margin-left: 10px;
+    background: rgba(255,255,255,.06);
+    border-radius: 6px; height: 22px;
+    display: flex; align-items: center;
+    padding: 0 10px; font-size: 11px; color: rgba(255,255,255,.35);
+  }
+  .browser img { width: 100%; display: block; }
+
+  /* PHONE MOCKUP */
+  .phone-wrap { display: flex; justify-content: center; gap: 24px; }
+  .phone {
+    width: 220px; border-radius: 36px;
+    background: #111; border: 2px solid rgba(255,255,255,.1);
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04);
+  }
+  .phone-notch { height: 28px; background: #000; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 5px; }
+  .phone-notch-pill { width: 70px; height: 12px; background: #111; border-radius: 100px; }
+  .phone img { width: 100%; }
+
+  /* GALLERY LAYOUTS */
+  .gallery-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .gallery-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .gallery-masonry { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .gallery-featured { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; }
+
+  /* AD CREATIVE CARD */
+  .ad-card {
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,.4);
+    transition: transform .4s cubic-bezier(.2,.8,.3,1), box-shadow .4s;
+  }
+  .ad-card:hover { transform: translateY(-8px) rotate(-1deg); box-shadow: 0 40px 60px rgba(0,0,0,.5); }
+  .ad-card img { width: 100%; }
+
+  /* FULL-WIDTH BANNER */
+  .full-banner {
+    width: 100%; border-radius: 20px; overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0,0,0,.5);
+  }
+  .full-banner img { width: 100%; height: auto; min-height: 280px; max-height: 520px; object-fit: cover; object-position: top; }
+  .full-banner-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(8,5,7,.8) 35%, transparent 70%);
+    display: flex; align-items: center; padding: 60px;
+  }
+  .fbo-content { max-width: 48ch; }
+
+  /* TECH STACK */
+  .tech-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .tech { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 8px 16px; border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); }
+
+  /* ROLE BADGE */
+  .role-box { background: rgba(255,255,255,.03); border: 1px solid var(--line); border-radius: 14px; padding: 20px 24px; margin-top: 28px; }
+  .role-box h4 { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .role-box p { font-size: .95rem; color: rgba(255,255,255,.8); line-height: 1.55; }
+
+  /* ========== SECTION DIVIDER ========== */
+  .divider { height: 1px; background: var(--line); margin: 0; }
+
+  /* ========== REVEALS ========== */
+  .rev { opacity: 0; transform: translateY(32px); transition: .8s cubic-bezier(.2,.7,.3,1); }
+  .rev.in { opacity: 1; transform: none; }
+  .rev-left { opacity: 0; transform: translateX(-32px); transition: .8s cubic-bezier(.2,.7,.3,1); }
+  .rev-left.in { opacity: 1; transform: none; }
+  .rev-right { opacity: 0; transform: translateX(32px); transition: .8s cubic-bezier(.2,.7,.3,1); }
+  .rev-right.in { opacity: 1; transform: none; }
+  .rev-scale { opacity: 0; transform: scale(.94); transition: .9s cubic-bezier(.2,.7,.3,1); }
+  .rev-scale.in { opacity: 1; transform: none; }
+
+  /* ========== FOOTER ========== */
+  .portfolio-footer { border-top: 1px solid var(--line); padding: 60px 0 40px; position: relative; z-index: 1; text-align: center; }
+  .portfolio-footer .logo { justify-content: center; margin-bottom: 16px; font-size: 22px; }
+  .portfolio-footer p { color: var(--muted); font-size: .95rem; margin-bottom: 32px; }
+  .cta-big { display: inline-flex; align-items: center; gap: 10px; background: var(--lemon); color: var(--black); padding: 16px 36px; border-radius: 100px; font-family: var(--body); font-weight: 700; font-size: 1rem; transition: .25s; }
+  .cta-big:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(241,249,90,.35); }
+
+  /* ========== SCROLL MARGINS ========== */
+  section, .hero-section { scroll-margin-top: 100px; }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 1024px) {
+    .split, .split-wide, .split.reverse { grid-template-columns: 1fr; gap: 48px; }
+    .split.reverse { direction: ltr; }
+    .gallery-featured { grid-template-columns: 1fr; }
+    .gallery-3 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 700px) {
+    .wrap { padding: 0 18px; }
+    .nav-in { padding: 16px 20px; }
+    .hero-section { padding: 110px 0 50px; }
+    .case-study { padding: 70px 0; }
+    .gallery-2, .gallery-3, .gallery-masonry { grid-template-columns: 1fr; }
+    .phone-wrap { gap: 12px; }
+    .phone { width: 150px; }
+    .metrics { gap: 20px; flex-wrap: wrap; }
+    .metric-val { font-size: 1.8rem; }
+    .proj-nav-inner { padding: 0 18px; }
+    .case-count { flex-wrap: wrap; gap: 12px; padding: 12px 20px; }
+    .full-banner img { min-height: 200px; }
+  }
+
+  /* ---------- FLOATING WHATSAPP ---------- */
+  .float-wa{
+    position:fixed;bottom:30px;right:30px;width:60px;height:60px;
+    background:#25D366;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,.4);
+    z-index:1000;transition:all .3s cubic-bezier(.2,.8,.3,1);color:#fff;
+  }
+  .float-wa:hover{
+    transform:translateY(-5px) scale(1.05);
+    box-shadow:0 12px 32px rgba(37,211,102,.5);color:#fff;
+  }
+  .float-wa svg{width:32px;height:32px;fill:currentColor;}
+
+  /* ---------- MEGA BRAND FOOTER ---------- */
+  .mega-brand{
+    position:relative;z-index:1;
+    padding:60px 0 40px;
+    overflow:hidden;
+    background:var(--black);
+    border-top:1px solid var(--line);
+    text-align:center;
+    user-select:none;
+  }
+  .mega-brand-word{
+    display:inline-flex;
+    align-items:baseline;
+    justify-content:center;
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(5rem,18vw,16rem);
+    line-height:.85;
+    letter-spacing:-.05em;
+    color:var(--white);
+    cursor:default;
+    padding:0 20px;
+  }
+  .mega-brand-word .ml{
+    display:inline-block;
+    transition:color .35s cubic-bezier(.2,.8,.3,1), text-shadow .35s, transform .35s;
+    position:relative;
+  }
+  .mega-brand-word .mdot{
+    display:inline-block;
+    width:clamp(.6rem,2.2vw,1.6rem);
+    height:clamp(.6rem,2.2vw,1.6rem);
+    border-radius:50%;
+    background:var(--lemon);
+    box-shadow:0 0 20px rgba(241,249,90,.5), 0 0 60px rgba(241,249,90,.2);
+    margin-left:.08em;
+    vertical-align:baseline;
+    position:relative;
+    bottom:.15em;
+    transition:transform .4s cubic-bezier(.2,.8,.3,1), box-shadow .4s;
+    animation:dotPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes dotPulse{
+    0%,100%{box-shadow:0 0 20px rgba(241,249,90,.5), 0 0 60px rgba(241,249,90,.2)}
+    50%{box-shadow:0 0 30px rgba(241,249,90,.7), 0 0 80px rgba(241,249,90,.35)}
+  }
+  .mega-brand-word:hover .mdot{
+    transform:scale(1.3);
+    box-shadow:0 0 40px rgba(241,249,90,.8), 0 0 100px rgba(241,249,90,.4);
+  }
+  .mega-brand-word .ml:nth-child(1):hover{color:var(--lemon);text-shadow:0 0 40px rgba(241,249,90,.5);transform:translateY(-6px)}
+  .mega-brand-word .ml:nth-child(2):hover{color:var(--orange);text-shadow:0 0 40px rgba(255,85,85,.5);transform:translateY(-6px)}
+  .mega-brand-word .ml:nth-child(3):hover{color:#a98bff;text-shadow:0 0 40px rgba(169,139,255,.5);transform:translateY(-6px)}
+  .mega-brand-word .ml:nth-child(4):hover{color:var(--lemon);text-shadow:0 0 40px rgba(241,249,90,.5);transform:translateY(-6px)}
+  .mega-brand-word .ml:nth-child(5):hover{color:var(--orange);text-shadow:0 0 40px rgba(255,85,85,.5);transform:translateY(-6px)}
+  .mega-brand-word .ml:nth-child(6):hover{color:#a98bff;text-shadow:0 0 40px rgba(169,139,255,.5);transform:translateY(-6px)}
+  .mega-brand-sub{
+    font-size:clamp(.7rem,1.4vw,1rem);
+    color:var(--muted);
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    font-weight:600;
+    margin-top:16px;
+  }
+  @media(max-width:600px){
+    .mega-brand{padding:40px 0 30px}
+    .mega-brand-word{font-size:clamp(3.5rem,20vw,6rem)}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-in">
+    <a href="index.html" class="logo"><span class="ll">M</span><span class="ll">O</span><span class="ll">G</span><span class="ll">H</span><span class="ll">E</span><span class="ll">Y</span><span class="dot"></span></a>
+    <div class="nav-right">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact" class="nav-pill">Start a project</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="wrap">
+    <div class="eyebrow rev"><span class="pip"></span>Agency Case Studies</div>
+    <h1 class="hero-title rev">Work that <em>speaks</em><br>for itself.</h1>
+    <p class="hero-sub rev">Six client projects. Real results. From performance marketing campaigns to full-stack web builds — here's proof that what we do, works.</p>
+    <div class="case-count rev">
+      <div><strong>6</strong><span> Projects</span></div>
+      <div style="width:1px;height:28px;background:var(--line)"></div>
+      <div><strong>154</strong><span> Leads generated</span></div>
+      <div style="width:1px;height:28px;background:var(--line)"></div>
+      <div><strong>5</strong><span> Websites delivered</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT NAV -->
+<div class="proj-nav">
+  <div class="proj-nav-inner">
+    <a href="#tata" class="pnav">01 — Tata Motors</a>
+    <a href="#cloudspillar" class="pnav">02 — Cloudspillar</a>
+    <a href="#noorel" class="pnav">03 — NOOREL</a>
+    <a href="#outservee" class="pnav">04 — Outservee</a>
+    <a href="#simran" class="pnav">05 — Simran Buildzone</a>
+    <a href="#dgsolution" class="pnav">06 — The DG Solution</a>
+  </div>
+</div>
+
+<!-- =============================================
+     01 TATA MOTORS
+     ============================================= -->
+<section class="case-study" id="tata">
+  <div class="wrap">
+
+    <div class="cs-label rev">
+      <span class="cs-num">01</span>
+      <span class="cs-badge" style="color:var(--orange);border-color:rgba(255,85,85,.35)">Digital Marketing</span>
+      <span class="cs-badge" style="color:var(--lemon);border-color:rgba(241,249,90,.3)">Meta Ads</span>
+      <span class="cs-badge" style="color:var(--lemon);border-color:rgba(241,249,90,.3)">Google Ads</span>
+    </div>
+
+    <!-- SPLIT: text left, hero ad right -->
+    <div class="split-wide" style="margin-bottom:72px;">
+      <div class="rev-left">
+        <h2 class="cs-client" style="color:#1D7FD1;">Tata Motors</h2>
+        <p class="cs-location">📍 Jitendra Automobiles, Rajkot — Gujarat, India</p>
+        <p class="cs-overview">
+          Jitendra Automobiles, an authorised Tata Motors commercial vehicle dealer, needed high-intent leads for their EV and CNG pickup portfolio across six cities in Saurashtra. We designed and ran a precision 15-day performance campaign that generated 154 qualified leads and directly attributed 8 vehicle sales.
+        </p>
+        <div class="svc-list">
+          <span class="svc-tag">Meta Ads (Facebook & Instagram)</span>
+          <span class="svc-tag">Google Search & Display</span>
+          <span class="svc-tag">Ad Creative Design</span>
+          <span class="svc-tag">Lead Generation</span>
+          <span class="svc-tag">Campaign Optimisation</span>
+        </div>
+        <div class="role-box">
+          <h4>Our Role</h4>
+          <p>End-to-end campaign strategy, creative production, audience targeting, A/B testing, and daily optimisation across Meta and Google Ads platforms.</p>
+        </div>
+        <div class="metrics">
+          <div>
+            <div class="metric-val" style="color:var(--lemon)">15</div>
+            <div class="metric-lab">Days Campaign</div>
+          </div>
+          <div>
+            <div class="metric-val" style="color:var(--orange)">154</div>
+            <div class="metric-lab">Qualified Leads</div>
+          </div>
+          <div>
+            <div class="metric-val" style="color:#1D7FD1">8</div>
+            <div class="metric-lab">Vehicles Sold</div>
+          </div>
+        </div>
+      </div>
+      <div class="rev-right">
+        <div class="ad-card">
+          <img src="ChatGPT Image Jul 2, 2026, 11_51_05 AM.png" alt="Tata Motors Jitendra Automobiles brand visual">
+        </div>
+      </div>
+    </div>
+
+    <!-- AD CREATIVES SHOWCASE -->
+    <div class="rev" style="margin-bottom:24px;">
+      <p style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;">Campaign Creatives Produced</p>
+    </div>
+    <div class="gallery-2 rev">
+      <div class="ad-card">
+        <img src="AMRELI INTRA-EV (4).jpg" alt="Tata Intra EV ad creative — Amreli campaign">
+      </div>
+      <div class="ad-card">
+        <img src="V20 IB_FULE.png" alt="Tata Intra V20 Bi-Fuel discount campaign">
+      </div>
+    </div>
+
+    <!-- TECH -->
+    <div class="rev" style="margin-top:52px;">
+      <p style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Tools & Platforms</p>
+      <div class="tech-grid">
+        <span class="tech" style="border-color:rgba(24,119,242,.3);color:#4299E1">Meta Ads Manager</span>
+        <span class="tech" style="border-color:rgba(66,133,244,.3);color:#6EA4F7">Google Ads</span>
+        <span class="tech" style="border-color:rgba(241,249,90,.2);color:var(--lemon)">Canva Pro</span>
+        <span class="tech" style="border-color:rgba(255,255,255,.15)">WhatsApp API</span>
+        <span class="tech" style="border-color:rgba(255,255,255,.15)">Analytics Dashboard</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============================================
+     02 CLOUDSPILLAR
+     ============================================= -->
+<section class="case-study" id="cloudspillar">
+  <div class="wrap">
+
+    <div class="cs-label rev">
+      <span class="cs-num">02</span>
+      <span class="cs-badge" style="color:#4299E1;border-color:rgba(66,153,225,.35)">Full-Stack Development</span>
+      <span class="cs-badge" style="color:#9F7AEA;border-color:rgba(159,122,234,.3)">Web Design</span>
+    </div>
+
+    <!-- FULL-WIDTH BROWSER HERO -->
+    <div class="rev-scale" style="margin-bottom:72px;">
+      <div class="browser">
+        <div class="browser-bar">
+          <span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span>
+          <div class="browser-url">cloudspillar.com</div>
+        </div>
+        <img src="Screenshot 2026-07-02 125456.png" alt="Cloudspillar homepage — Salesforce specialists">
+      </div>
+    </div>
+
+    <!-- SPLIT: details + hero section screenshot -->
+    <div class="split" style="margin-bottom:72px;">
+      <div class="rev-left">
+        <h2 class="cs-client">Cloudspillar</h2>
+        <p class="cs-location">🌐 cloudspillar.com</p>
+        <p class="cs-overview">
+          Cloudspillar is a certified Salesforce specialist firm that needed a world-class marketing website to attract enterprise clients and communicate complex technical services clearly. We designed and developed their complete brand presence from the ground up — a clean, conversion-optimised site that positions them as the premium choice for Salesforce CRM solutions.
+        </p>
+        <div class="svc-list">
+          <span class="svc-tag">Full-Stack Web Development</span>
+          <span class="svc-tag">UI/UX Design</span>
+          <span class="svc-tag">Brand Identity</span>
+          <span class="svc-tag">SEO Optimisation</span>
+          <span class="svc-tag">Responsive Design</span>
+          <span class="svc-tag">CMS Integration</span>
+        </div>
+        <div class="tech-grid" style="margin-top:24px;">
+          <span class="tech" style="border-color:rgba(66,153,225,.3);color:#4299E1">React.js</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">Tailwind CSS</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">Node.js</span>
+          <span class="tech" style="border-color:rgba(66,153,225,.3);color:#79B8F0">Salesforce API</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">Vercel</span>
+        </div>
+        <div class="role-box" style="margin-top:28px;">
+          <h4>Our Role</h4>
+          <p>Lead full-stack developer and UI designer. Responsible for the entire design system, component library, page architecture, CMS integration, and performance optimisation.</p>
+        </div>
+      </div>
+      <div class="rev-right">
+        <div class="browser">
+          <div class="browser-bar">
+            <span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span>
+            <div class="browser-url">cloudspillar.com — Team & Services</div>
+          </div>
+          <img src="Screenshot 2026-07-02 125540.png" alt="Cloudspillar team section">
+        </div>
+      </div>
+    </div>
+
+    <!-- FULL PAGE SCROLL PREVIEW -->
+    <div class="rev">
+      <p style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;">Full Page Preview</p>
+      <div style="display:grid;grid-template-columns:1fr 3fr;gap:20px;align-items:start;">
+        <div style="background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:14px;padding:20px;">
+          <p style="font-size:.9rem;color:var(--muted);line-height:1.65;">The site features a clean light-mode aesthetic with soft blue accents — ideal for positioning a B2B SaaS brand in the enterprise market. The modular component architecture ensures seamless scalability.</p>
+          <div class="metrics" style="border-top:none;padding-top:20px;margin-top:20px;border-top:1px solid var(--line);">
+            <div><div class="metric-val" style="color:#4299E1;font-size:1.8rem;">250+</div><div class="metric-lab">Projects displayed</div></div>
+            <div><div class="metric-val" style="color:var(--lemon);font-size:1.8rem;">98%</div><div class="metric-lab">Client retention shown</div></div>
+          </div>
+        </div>
+        <div class="browser" style="max-height:600px;overflow:hidden;">
+          <div class="browser-bar">
+            <span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span>
+            <div class="browser-url">cloudspillar.com — Full Page</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;height:400px;background:var(--ink);">
+            <a href="https://cloudspillar.com" target="_blank" rel="noopener" class="cta-big" style="text-decoration:none;font-size:1.1rem;padding:16px 32px;">Visit cloudspillar.com ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============================================
+     03 NOOREL
+     ============================================= -->
+<section class="case-study" id="noorel" style="background:rgba(255,255,255,.008);">
+  <div class="wrap">
+
+    <div class="cs-label rev">
+      <span class="cs-num">03</span>
+      <span class="cs-badge" style="color:#C9A55A;border-color:rgba(201,165,90,.35)">E-commerce</span>
+      <span class="cs-badge" style="color:#A8C4A2;border-color:rgba(168,196,162,.3)">Digital Marketing</span>
+      <span class="cs-badge" style="color:var(--muted);border-color:var(--line)">USA Market</span>
+    </div>
+
+    <div class="split" style="margin-bottom:72px;">
+      <div class="rev-right" style="order:1;">
+        <!-- Luxury product showcase -->
+        <div style="background:linear-gradient(135deg,#1a1208,#0f0d07);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.6);">
+          <img src="Screenshot 2026-07-02 125102.png" alt="NOOREL — Featured Products, luxury journals" style="width:100%;">
+        </div>
+      </div>
+      <div class="rev-left" style="order:2;">
+        <h2 class="cs-client" style="color:#C9A55A;">NOORÉL</h2>
+        <p class="cs-location">🌐 noorel.co — Target Market: USA</p>
+        <p class="cs-overview">
+          NOORÉL is a premium US-based lifestyle and luxury goods brand selling spiritual journals and curated gift sets. We built their e-commerce platform and ran their full digital marketing strategy — combining a dark, editorial website with targeted social and search campaigns to grow their American customer base.
+        </p>
+        <div class="svc-list">
+          <span class="svc-tag" style="border-color:rgba(201,165,90,.3);color:#C9A55A">E-commerce Development</span>
+          <span class="svc-tag">Digital Marketing</span>
+          <span class="svc-tag">Social Media Marketing</span>
+          <span class="svc-tag">Content Creation</span>
+          <span class="svc-tag">SEO Strategy</span>
+          <span class="svc-tag">Email Marketing</span>
+        </div>
+        <div class="role-box" style="margin-top:28px;background:rgba(201,165,90,.05);border-color:rgba(201,165,90,.2);">
+          <h4>Our Role</h4>
+          <p>Full-stack e-commerce build, brand positioning, product photography direction, Meta and Google Ads management, and monthly content creation for the USA market.</p>
+        </div>
+        <div class="metrics">
+          <div>
+            <div class="metric-val" style="color:#C9A55A">$39–55</div>
+            <div class="metric-lab">Product price range</div>
+          </div>
+          <div>
+            <div class="metric-val" style="color:var(--lemon)">USA</div>
+            <div class="metric-lab">Primary market</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TECH USED -->
+    <div class="rev">
+      <p style="font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Tech & Tools</p>
+      <div class="tech-grid">
+        <span class="tech" style="border-color:rgba(150,255,130,.3);color:#96FF82">Shopify</span>
+        <span class="tech" style="border-color:rgba(201,165,90,.3);color:#C9A55A">Liquid Theme Dev</span>
+        <span class="tech" style="border-color:rgba(24,119,242,.3);color:#4299E1">Meta Ads</span>
+        <span class="tech" style="border-color:rgba(66,133,244,.3);color:#6EA4F7">Google Ads</span>
+        <span class="tech" style="border-color:rgba(255,255,255,.12)">Klaviyo</span>
+        <span class="tech" style="border-color:rgba(255,255,255,.12)">Canva Pro</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============================================
+     04 OUTSERVEE
+     ============================================= -->
+<section class="case-study" id="outservee">
+  <div class="wrap">
+
+    <div class="cs-label rev">
+      <span class="cs-num">04</span>
+      <span class="cs-badge" style="color:#63B3ED;border-color:rgba(99,179,237,.35)">WordPress Dev</span>
+      <span class="cs-badge" style="color:#9F7AEA;border-color:rgba(159,122,234,.3)">Full-Stack</span>
+    </div>
+
+    <!-- FULL-WIDTH BANNER with overlay -->
+    <div class="full-banner rev-scale" style="margin-bottom:72px;">
+      <img src="Screenshot 2026-07-02 131940.png" alt="Outservee homepage — dark cosmic design">
+      <div class="full-banner-overlay">
+        <div class="fbo-content">
+          <h2 class="cs-client" style="font-size:clamp(2rem,4vw,3.2rem);margin-bottom:12px;">Outservee</h2>
+          <p class="cs-location" style="margin-bottom:16px;">🌐 outservee.com</p>
+          <p style="color:rgba(255,255,255,.75);font-size:1rem;line-height:1.65;max-width:44ch;">
+            A bold outsourcing agency brand with a space-themed aesthetic. We built their full WordPress website — from the cosmic hero section to the services carousel and client testimonials.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPLIT: details + full-page preview -->
+    <div class="split-wide">
+      <div class="rev-left">
+        <p class="cs-overview">
+          Outservee needed a premium WordPress website that matched their bold positioning as a 24/7 global outsourcing powerhouse. We delivered a stunning dark-mode site with a cosmic star-field hero, animated service cards, trust indicators, and a high-converting contact flow — all optimised for performance and lead generation.
+        </p>
+        <div class="svc-list">
+          <span class="svc-tag">WordPress Development</span>
+          <span class="svc-tag">Custom Theme Design</span>
+          <span class="svc-tag">UI/UX Strategy</span>
+          <span class="svc-tag">Page Speed Optimisation</span>
+          <span class="svc-tag">SEO Architecture</span>
+          <span class="svc-tag">Animation & Micro-interactions</span>
+        </div>
+        <div class="tech-grid" style="margin-top:20px;">
+          <span class="tech" style="border-color:rgba(33,117,186,.3);color:#4299E1">WordPress</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">Elementor Pro</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">GSAP</span>
+          <span class="tech" style="border-color:rgba(150,130,255,.3);color:#9F7AEA">Custom CSS</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">WP Rocket</span>
+        </div>
+        <div class="role-box" style="margin-top:28px;">
+          <h4>Our Role</h4>
+          <p>Full-stack WordPress developer and creative director. Designed the visual language, built all custom page sections, implemented animations and handled deployment.</p>
+        </div>
+        <div class="metrics">
+          <div>
+            <div class="metric-val" style="color:#63B3ED">4.9/5</div>
+            <div class="metric-lab">Client Rating</div>
+          </div>
+          <div>
+            <div class="metric-val" style="color:var(--lemon)">300+</div>
+            <div class="metric-lab">Happy Customers</div>
+          </div>
+        </div>
+      </div>
+      <div class="rev-right">
+        <div class="browser">
+          <div class="browser-bar">
+            <span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span>
+            <div class="browser-url">outservee.com — Full Site</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;height:400px;background:var(--ink);">
+            <a href="https://outservee.com" target="_blank" rel="noopener" class="cta-big" style="text-decoration:none;font-size:1.1rem;padding:16px 32px;">Visit outservee.com ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============================================
+     05 SIMRAN BUILDZONE
+     ============================================= -->
+<section class="case-study" id="simran" style="background:rgba(255,255,255,.008);">
+  <div class="wrap">
+
+    <div class="cs-label rev">
+      <span class="cs-num">05</span>
+      <span class="cs-badge" style="color:#68B57A;border-color:rgba(104,181,122,.35)">Web Development</span>
+      <span class="cs-badge" style="color:#C27B4A;border-color:rgba(194,123,74,.3)">Real Estate</span>
+    </div>
+
+    <!-- BROWSER HERO -->
+    <div class="rev-scale" style="margin-bottom:72px;">
+      <div class="browser">
+        <div class="browser-bar">
+          <span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span>
+          <div class="browser-url">simranbuildzone.in</div>
+        </div>
+        <img src="Screenshot 2026-07-02 125003.png" alt="Simran Buildzone homepage — real estate">
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="rev-left">
+        <h2 class="cs-client" style="color:#68B57A;">Simran Buildzone</h2>
+        <p class="cs-location">🌐 simranbuildzone.in — Hapur & NCR, India</p>
+        <p class="cs-overview">
+          Simran Buildzone is a trusted real estate company operating in Hapur and the NCR region, dealing in residential plots, farmland, commercial shops, and agricultural land. We built their complete digital presence — a professional, fast-loading website that generates property enquiries and establishes credibility with buyers.
+        </p>
+        <div class="svc-list">
+          <span class="svc-tag" style="border-color:rgba(104,181,122,.3);color:#68B57A">Full-Stack Development</span>
+          <span class="svc-tag">Property Listings System</span>
+          <span class="svc-tag">Responsive Design</span>
+          <span class="svc-tag">Lead Capture Forms</span>
+          <span class="svc-tag">SEO Optimisation</span>
+          <span class="svc-tag">WhatsApp Integration</span>
+        </div>
+        <div class="role-box" style="background:rgba(104,181,122,.04);border-color:rgba(104,181,122,.2);">
+          <h4>Our Role</h4>
+          <p>End-to-end web developer. Designed and coded the full website including property listing pages, enquiry flows, map integration, and mobile responsiveness.</p>
+        </div>
+        <div class="tech-grid" style="margin-top:20px;">
+          <span class="tech" style="border-color:rgba(104,181,122,.3);color:#68B57A">HTML5 / CSS3</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">JavaScript</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">PHP / WordPress</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">Google Maps API</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">cPanel Hosting</span>
+        </div>
+      </div>
+      <div class="rev-right">
+        <div class="browser">
+          <div class="browser-bar">
+            <span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span>
+            <div class="browser-url">simranbuildzone.in — Featured Listings</div>
+          </div>
+          <img src="Screenshot 2026-07-02 125023.png" alt="Simran Buildzone property listings page">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============================================
+     06 THE DG SOLUTION
+     ============================================= -->
+<section class="case-study" id="dgsolution">
+  <div class="wrap">
+
+    <div class="cs-label rev">
+      <span class="cs-num">06</span>
+      <span class="cs-badge" style="color:#A8C45A;border-color:rgba(168,196,90,.35)">Full-Stack Dev</span>
+      <span class="cs-badge" style="color:rgba(255,255,255,.6);border-color:var(--line)">Editorial Design</span>
+    </div>
+
+    <!-- 3-col layout: full page left, hero top-right, about bottom-right -->
+    <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:24px;margin-bottom:72px;">
+      <div class="rev-left" style="display:flex;flex-direction:column;gap:24px;">
+        <div class="browser" style="flex:1;overflow:hidden;max-height:380px;">
+          <div class="browser-bar">
+            <span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span>
+            <div class="browser-url">thedgsolution.com</div>
+          </div>
+          <img src="Screenshot 2026-07-02 132513.png" alt="The DG Solution — homepage hero">
+        </div>
+      </div>
+      <div class="rev-right">
+        <div class="browser" style="overflow:hidden;max-height:728px;">
+          <div class="browser-bar">
+            <span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span>
+            <div class="browser-url">thedgsolution.com — Full Page</div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;height:400px;background:var(--ink);">
+            <a href="https://thedgsolution.com" target="_blank" rel="noopener" class="cta-big" style="text-decoration:none;font-size:1.1rem;padding:16px 32px;">Visit thedgsolution.com ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="rev-left">
+        <h2 class="cs-client" style="color:#A8C45A;">TheDigiSolutions</h2>
+        <p class="cs-location">🌐 thedgsolution.com — Remote Staffing Agency</p>
+        <p class="cs-overview">
+          TheDigiSolutions is a remote staffing and outsourcing company that connects global businesses with pre-vetted professionals from $7/hour. We designed and developed their full marketing website with a distinctive editorial aesthetic — bold serif typography on a warm cream palette — that sets them apart from every competitor in the outsourcing space.
+        </p>
+        <div class="svc-list">
+          <span class="svc-tag" style="border-color:rgba(168,196,90,.3);color:#A8C45A">Full-Stack Development</span>
+          <span class="svc-tag">UI/UX Design</span>
+          <span class="svc-tag">Brand Identity</span>
+          <span class="svc-tag">Conversion Optimisation</span>
+          <span class="svc-tag">SEO Architecture</span>
+          <span class="svc-tag">Form & CRM Integration</span>
+        </div>
+        <div class="role-box" style="background:rgba(168,196,90,.04);border-color:rgba(168,196,90,.2);">
+          <h4>Our Role</h4>
+          <p>Lead designer and full-stack developer. Created the complete brand visual language — typography system, color palette, layout patterns — and coded the entire site from scratch.</p>
+        </div>
+      </div>
+      <div class="rev-right">
+        <div class="browser" style="overflow:hidden;">
+          <div class="browser-bar">
+            <span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span>
+            <div class="browser-url">thedgsolution.com — hero section</div>
+          </div>
+          <img src="Screenshot 2026-07-02 132529.png" alt="The DG Solution — hero with remote professional">
+        </div>
+        <div class="metrics" style="margin-top:32px;">
+          <div>
+            <div class="metric-val" style="color:#A8C45A">200+</div>
+            <div class="metric-lab">Clients Served</div>
+          </div>
+          <div>
+            <div class="metric-val" style="color:var(--lemon)">$7/hr</div>
+            <div class="metric-lab">Starting Rate</div>
+          </div>
+          <div>
+            <div class="metric-val" style="color:var(--orange)">98%</div>
+            <div class="metric-lab">Client Satisfaction</div>
+          </div>
+        </div>
+        <div class="tech-grid" style="margin-top:20px;">
+          <span class="tech" style="border-color:rgba(168,196,90,.3);color:#A8C45A">HTML / CSS</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">JavaScript</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">GSAP</span>
+          <span class="tech" style="border-color:rgba(33,117,186,.3);color:#4299E1">WordPress</span>
+          <span class="tech" style="border-color:rgba(255,255,255,.12)">HubSpot Forms</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- =============================================
+     FOOTER CTA
+     ============================================= -->
+<footer class="portfolio-footer">
+  <div class="wrap">
+    <div class="logo" style="justify-content:center;margin-bottom:16px;font-size:22px;">
+      <span class="ll">M</span><span class="ll">O</span><span class="ll">G</span><span class="ll">H</span><span class="ll">E</span><span class="ll">Y</span><span class="dot"></span>
+    </div>
+    <p>Want results like these for your brand?</p>
+    <a href="index.html#contact" class="cta-big">Start your project →</a>
+    <div style="margin-top:52px;padding-top:32px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted);">
+      <span>© 2026 Moghey. All rights reserved.</span>
+      <a href="index.html" style="color:var(--muted);transition:.2s;" onmouseover="this.style.color='var(--lemon)'" onmouseout="this.style.color='var(--muted)'">← Back to Homepage</a>
+    </div>
+  </div>
+</footer>
+
+<!-- MEGA BRAND FOOTER -->
+<div class="mega-brand rev">
+  <div class="mega-brand-word">
+    <span class="ml">M</span><span class="ml">O</span><span class="ml">G</span><span class="ml">H</span><span class="ml">E</span><span class="ml">Y</span><span class="mdot"></span>
+  </div>
+  <div class="mega-brand-sub">Performance Marketing Agency</div>
+</div>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+  // Project nav highlight
+  const pnavLinks = document.querySelectorAll('.pnav');
+  const sections = ['tata','cloudspillar','noorel','outservee','simran','dgsolution'];
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < 160) current = id;
+    });
+    pnavLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+
+  // Scroll reveal
+  const revClasses = ['.rev', '.rev-left', '.rev-right', '.rev-scale'];
+  const allRevEls = document.querySelectorAll(revClasses.join(','));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  allRevEls.forEach((el, i) => {
+    el.style.transitionDelay = Math.min(i % 4 * 80, 240) + 'ms';
+    observer.observe(el);
+  });
+</script>
+
+<a href="https://wa.me/919821339865" class="float-wa" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+</body>
+</html>

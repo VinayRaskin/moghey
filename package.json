@@ -1,0 +1,14 @@
+{
+  "name": "apexmedia-optimizer",
+  "version": "1.0.0",
+  "description": "Image optimization script",
+  "main": "optimize.js",
+  "scripts": {
+    "start": "node optimize.js",
+    "clean": "node cleanup.js",
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.4"
+  }
+}
