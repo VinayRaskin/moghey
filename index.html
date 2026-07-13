@@ -100,7 +100,7 @@
   @keyframes ping{0%,100%{opacity:1}50%{opacity:.25}}
   h1.hero{font-family:var(--display);font-weight:800;font-size:clamp(3rem,8.5vw,7.2rem);line-height:.95;letter-spacing:-.035em;max-width:14ch}
   h1.hero .o{color:var(--orange)}
-  h1.hero .p{color:var(--purple);-webkit-text-stroke:1px var(--purple);color:transparent}
+  h1.hero .p{color:var(--purple)}
   .sub{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--muted);max-width:54ch;margin:28px 0 38px;line-height:1.55}
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .btn-ghost{border:1px solid var(--line);color:var(--white);padding:14px 26px;border-radius:100px}
@@ -491,6 +491,44 @@
     .mega-brand{padding:40px 0 30px}
     .mega-brand-word{font-size:clamp(3.5rem,20vw,6rem)}
   }
+
+  /* ---------- POPUP FORM ---------- */
+  .popup-overlay{
+    position:fixed;inset:0;background:rgba(8,5,7,.85);backdrop-filter:blur(8px);
+    z-index:9999;display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transition:opacity .4s cubic-bezier(.2,.8,.3,1);
+    padding:20px;
+  }
+  .popup-overlay.active{opacity:1;pointer-events:auto;}
+  .popup-content{
+    background:var(--ink);border:1px solid var(--line);border-radius:24px;
+    padding:40px;width:100%;max-width:540px;position:relative;
+    transform:translateY(40px);transition:transform .5s cubic-bezier(.2,.8,.3,1);
+    box-shadow:0 24px 60px rgba(0,0,0,.5);
+    max-height: 90vh; overflow-y: auto;
+  }
+  .popup-overlay.active .popup-content{transform:translateY(0);}
+  .popup-close{
+    position:absolute;top:20px;right:24px;background:none;border:none;
+    color:var(--muted);font-size:24px;cursor:pointer;transition:.2s;
+  }
+  .popup-close:hover{color:var(--white);transform:rotate(90deg);}
+  .popup-header{margin-bottom:24px;text-align:center;}
+  .popup-header h3{font-family:var(--display);font-size:1.8rem;margin-bottom:8px;}
+  .popup-header p{color:var(--muted);font-size:.95rem;}
+  
+  .wa-popup-btn{
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    background:#25D366;color:#fff;text-decoration:none;font-weight:600;
+    padding:14px;border-radius:12px;margin-top:16px;transition:.2s;
+    font-size:15.5px;
+  }
+  .wa-popup-btn:hover{background:#1da851;transform:translateY(-2px);}
+  .wa-popup-btn svg{width:22px;height:22px;fill:currentColor;}
+  
+  @media(max-width:600px){
+    .popup-content{padding:30px 20px;}
+  }
 </style>
 </head>
 <body>
@@ -623,18 +661,35 @@
       <h2>Brands we've helped grow.</h2>
       <p class="sec-intro">Real campaigns, real numbers. Here's a snapshot of what partnership with us looks like.</p>
     </div>
+    <style>
+      .animated-icon {
+        width: 48px;
+        height: 48px;
+        fill: none;
+        stroke: var(--muted);
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: all 0.4s cubic-bezier(0.2, 0.8, 0.3, 1);
+      }
+      .client:hover .animated-icon {
+        stroke: var(--white);
+        transform: scale(1.15) translateY(-5px);
+        filter: drop-shadow(0 12px 24px rgba(255, 255, 255, 0.3));
+      }
+      .client:nth-child(1):hover .animated-icon { stroke: var(--orange); filter: drop-shadow(0 12px 24px rgba(255, 85, 85, 0.4)); }
+      .client:nth-child(2):hover .animated-icon { stroke: var(--lemon); filter: drop-shadow(0 12px 24px rgba(241, 249, 90, 0.4)); }
+      .client:nth-child(3):hover .animated-icon { stroke: var(--purple); filter: drop-shadow(0 12px 24px rgba(169, 139, 255, 0.6)); }
+      .client:nth-child(4):hover .animated-icon { stroke: #25D366; filter: drop-shadow(0 12px 24px rgba(37, 211, 102, 0.4)); }
+    </style>
     <div class="clients-grid">
 
-      <!-- Tata Motors: dark JPG logo on dark card -->
-      <div class="client logo-dark reveal">
+      <div class="client reveal">
         <div class="client-logo-wrap">
-          <img
-            src="Tata Motors logo.jpg"
-            alt="Tata Motors official logo"
-            loading="lazy"
-            width="120"
-            height="80"
-          >
+          <svg class="animated-icon" viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="M12 8v4l3 3" />
+          </svg>
         </div>
         <div class="client-label">
           <h3>Tata Motors</h3>
@@ -642,16 +697,13 @@
         </div>
       </div>
 
-      <!-- Sprouza: teal icon on white background -->
-      <div class="client logo-light reveal">
+      <div class="client reveal">
         <div class="client-logo-wrap">
-          <img
-            src="sprouza.png"
-            alt="Sprouza official logo"
-            loading="lazy"
-            width="80"
-            height="80"
-          >
+          <svg class="animated-icon" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+            <path d="M2 17l10 5 10-5" />
+            <path d="M2 12l10 5 10-5" />
+          </svg>
         </div>
         <div class="client-label">
           <h3>Sprouza</h3>
@@ -659,16 +711,11 @@
         </div>
       </div>
 
-      <!-- Cloudspillar: blue icon PNG (color) -->
-      <div class="client logo-icon reveal">
+      <div class="client reveal">
         <div class="client-logo-wrap">
-          <img
-            src="cloudspillar logo.png"
-            alt="Cloudspillar official logo"
-            loading="lazy"
-            width="80"
-            height="80"
-          >
+          <svg class="animated-icon" viewBox="0 0 24 24">
+            <path d="M17.5 19C19.9853 19 22 16.9853 22 14.5C22 12.1332 20.177 10.2023 17.8576 10.0232C17.3488 6.62125 14.4369 4 10.875 4C6.52576 4 3 7.52576 3 11.875C3 12.4431 3.06013 12.9972 3.17415 13.5298C1.9056 14.3732 1.05 15.8367 1.05 17.5C1.05 19.9853 3.06472 22 5.55 22H17.5Z" />
+          </svg>
         </div>
         <div class="client-label">
           <h3>Cloudspillar</h3>
@@ -676,16 +723,13 @@
         </div>
       </div>
 
-      <!-- Outservee: white PNG logo, perfect on dark bg -->
-      <div class="client logo-dark reveal">
+      <div class="client reveal">
         <div class="client-logo-wrap">
-          <img
-            src="outservee logo.png"
-            alt="Outservee official logo"
-            loading="lazy"
-            width="140"
-            height="56"
-          >
+          <svg class="animated-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            <path d="M2 12h20" />
+          </svg>
         </div>
         <div class="client-label">
           <h3>Outservee</h3>
@@ -880,24 +924,25 @@
       </div>
       <form id="enquiry">
         <div class="row">
-          <div><label>Full Name</label><input type="text" name="name" required placeholder="Your name"></div>
+          <div><label>Full Name</label><input type="text" name="fullName" required placeholder="Your name"></div>
           <div><label>Email Address</label><input type="email" name="email" required placeholder="you@brand.com"></div>
         </div>
         <div class="row">
           <div><label>Phone Number</label><input type="tel" name="phone" placeholder="Your phone number"></div>
-          <div><label>Brand / Company Name</label><input type="text" name="company" placeholder="Your brand"></div>
+          <div><label>Brand / Company Name</label><input type="text" name="brandName" placeholder="Your brand"></div>
         </div>
         <div><label>Service Needed</label>
-          <select name="service">
-            <option>Paid Media Marketing</option>
-            <option>Organic Growth / SEO</option>
-            <option>AI Content</option>
-            <option>Video Production</option>
-            <option>Website Creation</option>
-            <option>Full Growth Partnership</option>
+          <select name="service" required>
+            <option value="" disabled selected>Select a Service</option>
+            <option value="Paid Media Marketing">Paid Media Marketing</option>
+            <option value="Organic Growth / SEO">Organic Growth / SEO</option>
+            <option value="AI Content">AI Content</option>
+            <option value="Video Production">Video Production</option>
+            <option value="Website Creation">Website Creation</option>
+            <option value="Full Growth Partnership">Full Growth Partnership</option>
           </select>
         </div>
-        <div><label>Message / Brief</label><textarea name="message" placeholder="Tell us what you're trying to achieve..."></textarea></div>
+        <div><label>Message / Brief</label><textarea name="message" placeholder="Tell us what you're trying to achieve..." required></textarea></div>
         <button type="submit" class="btn btn-pill">Send enquiry →</button>
         <p class="formnote" id="formnote">We reply within 1 business day.</p>
       </form>
@@ -957,38 +1002,147 @@
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
   document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el);});
 
-  // form (mailto submission)
-  document.getElementById('enquiry').addEventListener('submit',(e)=>{
+  // form (google sheets submission)
+  const form = document.getElementById('enquiry');
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwmMW8Zqs6NnE5P718e0WLgr5VvsX0MoUJvcR3OigSnrxHtKpYxn0gCYxjLZBTd0Lc7/exec';
+
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const formData = new FormData(e.target);
-    const name = formData.get('name') || '';
-    const email = formData.get('email') || '';
-    const phone = formData.get('phone') || '';
-    const company = formData.get('company') || '';
-    const service = formData.get('service') || '';
-    const message = formData.get('message') || '';
-
-    const subject = encodeURIComponent(`New Enquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nCompany: ${company}\nService: ${service}\n\nMessage:\n${message}`);
-
-    window.location.href = `mailto:moghey360@gmail.com?subject=${subject}&body=${body}`;
-
-    const n=document.getElementById('formnote');
-    n.textContent='✓ Opening your email client...';
-    n.style.color='var(--lemon)';
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const n = document.getElementById('formnote');
+    const originalBtnText = submitBtn.textContent;
     
-      setTimeout(() => {
-        e.target.reset();
-        n.textContent='We reply within 1 business day.';
-        n.style.color='var(--muted)';
-      }, 3000);
-    });
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+
+    const formData = new FormData(form);
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => {
+        n.textContent = '✓ Thank you! Your message has been sent successfully.';
+        n.style.color = 'var(--lemon)';
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        n.textContent = 'Oops! Something went wrong. Please try again.';
+        n.style.color = '#ef4444'; // Red error text
+      })
+      .finally(() => {
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+        setTimeout(() => {
+          n.textContent = 'We reply within 1 business day.';
+          n.style.color = 'var(--muted)';
+        }, 5000);
+      });
+  });
   </script>
   
 
 <a href="https://wa.me/919821339865" class="float-wa" target="_blank" rel="noopener noreferrer" title="Chat on WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
+
+<!-- POPUP OVERLAY -->
+<div class="popup-overlay" id="popup-overlay">
+  <div class="popup-content">
+    <button class="popup-close" id="popup-close">✕</button>
+    <div class="popup-header">
+      <h3>Ready to grow faster?</h3>
+      <p>Tell us about your brand and get a free custom growth plan.</p>
+    </div>
+    
+    <form id="popup-enquiry">
+      <div class="row">
+        <div><label>Full Name</label><input type="text" name="fullName" required placeholder="Your name"></div>
+        <div><label>Email Address</label><input type="email" name="email" required placeholder="you@brand.com"></div>
+      </div>
+      <div class="row">
+        <div><label>Phone Number</label><input type="tel" name="phone" placeholder="Your phone number"></div>
+        <div><label>Brand / Company Name</label><input type="text" name="brandName" placeholder="Your brand"></div>
+      </div>
+      <div><label>Service Needed</label>
+        <select name="service" required>
+          <option value="" disabled selected>Select a Service</option>
+          <option value="Paid Media Marketing">Paid Media Marketing</option>
+          <option value="Organic Growth / SEO">Organic Growth / SEO</option>
+          <option value="AI Content">AI Content</option>
+          <option value="Video Production">Video Production</option>
+          <option value="Website Creation">Website Creation</option>
+          <option value="Full Growth Partnership">Full Growth Partnership</option>
+        </select>
+      </div>
+      <div><label>Message / Brief</label><textarea name="message" placeholder="Tell us what you're trying to achieve..." required></textarea></div>
+      <button type="submit" class="btn btn-pill">Send enquiry →</button>
+      <p class="formnote" id="popup-formnote">We reply within 1 business day.</p>
+    </form>
+    
+    <a href="https://wa.me/919821339865" target="_blank" rel="noopener noreferrer" class="wa-popup-btn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Chat with us on WhatsApp
+    </a>
+  </div>
+</div>
+
+<script>
+  // Popup Logic
+  document.addEventListener("DOMContentLoaded", () => {
+    const popup = document.getElementById('popup-overlay');
+    const closeBtn = document.getElementById('popup-close');
+    
+    // Check if user has seen popup
+    if (!localStorage.getItem('hasSeenPopup')) {
+      setTimeout(() => {
+        popup.classList.add('active');
+        localStorage.setItem('hasSeenPopup', 'true');
+      }, 2000);
+    }
+    
+    // Close logic
+    const closePopup = () => popup.classList.remove('active');
+    closeBtn.addEventListener('click', closePopup);
+    popup.addEventListener('click', (e) => {
+      if(e.target === popup) closePopup();
+    });
+
+    // Form Submission for Popup
+    const popupForm = document.getElementById('popup-enquiry');
+    popupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const submitBtn = popupForm.querySelector('button[type="submit"]');
+      const n = document.getElementById('popup-formnote');
+      const originalBtnText = submitBtn.textContent;
+      
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      const formData = new FormData(popupForm);
+
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(response => {
+          n.textContent = '✓ Thank you! Your message has been sent successfully.';
+          n.style.color = 'var(--lemon)';
+          popupForm.reset();
+        })
+        .catch(error => {
+          console.error('Error!', error.message);
+          n.textContent = 'Oops! Something went wrong. Please try again.';
+          n.style.color = '#ef4444'; 
+        })
+        .finally(() => {
+          submitBtn.textContent = originalBtnText;
+          submitBtn.disabled = false;
+          setTimeout(() => {
+            n.textContent = 'We reply within 1 business day.';
+            n.style.color = 'var(--muted)';
+            closePopup(); // Close popup after success
+          }, 4000);
+        });
+    });
+  });
+</script>
 </body>
 </html>
